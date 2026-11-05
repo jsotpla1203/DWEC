@@ -1,6 +1,7 @@
 "use strict";
 
-//Identificamos los elementos del HTML
+//Identificar los elementos del HTML
+//Dados
 const dadoJ1 = document.querySelector("#dado-j1");
 const dadoJ2 = document.querySelector("#dado-j2");
 const dadoJ3 = document.querySelector("#dado-j3");
@@ -9,12 +10,13 @@ const dadoO1 = document.querySelector("#dado-o1");
 const dadoO2 = document.querySelector("#dado-o2");
 const dadoO3 = document.querySelector("#dado-o3");
 
+//Resultados
 const resultadoJugador = document.querySelector("#resultadoJugador");
 const puntosTotalesJugador = document.querySelector("#puntosTotalesJugador");
 const resultadoOrdenador = document.querySelector("#resultadoOrdenador");
 const puntosTotalesOrdenador = document.querySelector("#puntosTotalesOrdenador");
 
-
+//Resultado final y botones
 const resultadoFinal = document.querySelector("#resultado");
 const lanzarDados = document.querySelector("#lanzar");
 const reiniciarDados = document.querySelector("#reiniciar");
@@ -33,27 +35,27 @@ function clasificarDados(d1, d2, d3) {
     //Si hay Trío, el dado que se repite es d1
     if (d1 === d2 && d2 === d3) {
         valorDado = d1;
-        return ["Trío de " + valorDado, 30 + valorDado] //Array con el texto y con los puntos 
+        return ["Trío de " + valorDado, 30 + valorDado]; //Array con el texto y con los puntos 
                                                         //(He visto en internet que en JavaScript se pueden mezclar tipos de datos)
-    }
+    };
 
     //Si el primer dado se repite con el segundo o el tercero
     if (d1 === d2 || d1 === d3) {
         valorDado = d1;
-        return ["Pareja de " + valorDado, 20 + valorDado]
-    }
+        return ["Pareja de " + valorDado, 20 + valorDado];
+    };
 
     //Si el segundo dado se repite con el tercero
     if (d2 === d3) {
         valorDado = d2;
-        return ["Pareja de " + valorDado, 20 + valorDado]
-    }
+        return ["Pareja de " + valorDado, 20 + valorDado];
+    };
 
     //Si ningún dado es igual
     return ["No hay combinacion mala suerte", d1 + d2 + d3];
 }
 
-
+//Boton para lanzar los dados
 lanzarDados.addEventListener("click", () => {
     //Generar dados del jugador
     const j1 = lanzarDado();
@@ -93,8 +95,26 @@ lanzarDados.addEventListener("click", () => {
         resultadoFinal.textContent = "Gana el ordenador (la banca siempre gana)";
     } else {
         resultadoFinal.textContent = "Empate (Mira que es difícil que salga)";
-    }
+    };
+});
 
-    
+//Boton para reiniciar los dados
+reiniciarDados.addEventListener("click", () => {
+    //Cambio el textContent para dejarlo todo como estaba
+    dadoJ1.textContent = "-";
+    dadoJ2.textContent = "-";
+    dadoJ3.textContent = "-";
 
-})
+    dadoO1.textContent = "-";
+    dadoO2.textContent = "-";
+    dadoO3.textContent = "-";
+
+
+    resultadoJugador.textContent = "Sin tirar";
+    puntosTotalesJugador.textContent = "Puntos del jugador";
+
+    resultadoOrdenador.textContent = "Sin tirar";
+    puntosTotalesOrdenador.textContent = "Puntos del ordenador";
+
+    resultadoFinal.textContent = "Esperando tirada...";
+});
